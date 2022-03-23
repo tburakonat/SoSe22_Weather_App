@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/4921d1b422.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="topbar">
+      <i id="topbar-icon" class="fa-solid fa-cloud-sun"></i>
+      <div id="topbar-text">Weather App</div>
+    </div>
+    <div id="content">
+      <form id="inputs">
+        <input
+          type="text"
+          name="city-input"
+          id="city-input"
+          placeholder="Enter city name..."
+        />
+        <button type="submit" id="submit-city">Search</button>
+      </form>
+      <div class="middle-section">
+        <div id="currentDay">
+          <div id="name"></div>
+          <div id="dayName"></div>
+          <div class="descriptionDiv">
+            <div id="descDiv"></div>
+            <img src="" alt="" id="icon" />
+          </div>
+          <div class="details">
+            <div id="temp"></div>
+            <div id="windSpeed"></div>
+          </div>
+        </div>
+      </div>
+      <div id="forecast"></div>
+    </div>
+    <script src="city.js"></script>
+    <script src="forecast.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

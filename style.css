@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------- TOP BAR -------------- */
+
+#topbar {
+  height: 15vh;
+  background-color: rgba(19, 117, 27, 0.521);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#topbar-icon {
+  font-size: 4rem;
+}
+
+#topbar-text {
+  font-size: 4rem;
+}
+/* -------------- CONTENT -------------- */
+
+#content {
+  height: 85vh;
+  margin: 0;
+  padding: 0;
+  background: url(images/night3.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -------------- SEARCH -------------- */
+
+#inputs {
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+}
+
+#city-input {
+  font-size: x-large;
+  width: 340px;
+  height: 50px;
+  border: none;
+  outline: none;
+  padding: 0 25px;
+  border-radius: 25px 0 0 25px;
+}
+
+#submit-city {
+  background-color: rgba(127, 238, 136, 0.521);
+  font-size: x-large;
+  border-radius: 0 25px 25px 0;
+  height: 50px;
+  width: 150px;
+  border: none;
+  outline: none;
+  color: rgb(34, 32, 32);
+  cursor: pointer;
+}
+
+#submit-city:hover {
+  background-color: rgba(127, 238, 136, 0.404);
+}
+
+/* -------------- MID SECTION -------------- */
+
+.middle-section {
+  width: 100%;
+  height: 55vh;
+}
+#currentDay {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  align-items: center;
+  font-size: x-large;
+  width: 30%;
+  color: rgb(255, 255, 255);
+}
+
+#name {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+#dayName {
+  font-weight: bold;
+}
+
+#temp {
+  font-weight: bold;
+}
+
+#windSpeed {
+  font-weight: bold;
+}
+
+.descriptionDiv {
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+/* -------------- BOTTOM SECTION -------------- */
+
+#forecast {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 20vh;
+  /* background-color: rgba(248, 242, 242, 0.24); */
+  color: rgb(255, 255, 255);
+}
+
+.forecast-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
