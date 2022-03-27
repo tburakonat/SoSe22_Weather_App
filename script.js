@@ -162,7 +162,7 @@ function renderToggler() {
     const forecastToggler = document.createElement("button");
     forecastToggler.setAttribute("id", "toggle-forecast");
     forecastToggler.innerHTML = "Toggle Forecast";
-    document.querySelector(".middle-section").after(forecastToggler);
+    document.querySelector(".middle-content").after(forecastToggler);
     forecastToggler.addEventListener("click", () => {
       const forecast = document.getElementById("forecast");
       if (forecast.style.visibility !== "hidden") {
