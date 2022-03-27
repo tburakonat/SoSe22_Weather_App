@@ -165,10 +165,10 @@ function renderToggler() {
     document.querySelector(".middle-content").after(forecastToggler);
     forecastToggler.addEventListener("click", () => {
       const forecast = document.getElementById("forecast");
-      if (forecast.style.visibility !== "hidden") {
-        forecast.style.visibility = "hidden";
+      if (!forecast.classList.contains("visible")) {
+        forecast.classList.add("visible");
       } else {
-        forecast.style.visibility = "visible";
+        forecast.classList.remove("visible");
       }
     });
   }
