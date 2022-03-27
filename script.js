@@ -174,6 +174,20 @@ function renderToggler() {
   }
 }
 
+const historyToggler = document.getElementById("toggle-history");
+
+historyToggler.addEventListener("click", () => {
+  const searchHistory = document.getElementById("search-history");
+  const searchItems = document.getElementById("search-items");
+    if (!searchHistory.classList.contains("hide")) {
+      searchHistory.classList.add("hide");
+      searchItems.classList.add("hide");
+    } else {
+      searchHistory.classList.remove("hide");
+      searchItems.classList.remove("hide");
+    }
+});
+
 const city = document.getElementById("location");
 const country = document.getElementById("country");
 const state = document.getElementById("state");
