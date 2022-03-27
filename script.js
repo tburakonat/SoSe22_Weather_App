@@ -8,6 +8,9 @@ async function callWeatherData(city) {
     );
     const data = await response.json();
     makeObject(data);
+    searchHistory.addToHistory(city);
+    setData();
+    renderSearchHistory();
   } catch (error) {
     console.log("Something went wrong: " + error);
   }
@@ -28,6 +31,36 @@ async function callForecastData(lat, lon, city) {
   } catch (error) {
     console.log("Something went wrong: 2" + error);
   }
+}
+
+function setData() {
+  let myDataSerialized = JSON.stringify(searchHistory.getHistory());
+  localStorage.setItem("myData", myDataSerialized);
+}
+
+function getData() {
+  if (localStorage.getItem("myData") !== null) {
+    let myDataDeserialized = JSON.parse(localStorage.getItem("myData"));
+    myDataDeserialized.forEach((search) => {
+      searchHistory.addToHistory(search);
+    });
+  }
+}
+
+function renderSearchHistory() {
+  const searchHistoryDiv = document.getElementsByClassName("search-items")[0];
+  searchHistoryDiv.innerHTML = "";
+  for (search of searchHistory.getHistory()) {
+    let item = document.createElement("div");
+    item.innerHTML = `<button class=search-button>${search}</button>`;
+    searchHistoryDiv.appendChild(item);
+  }
+  document.querySelectorAll(".search-button").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      callWeatherData(e.target.innerHTML);
+      document.getElementById("city-input").value = e.target.innerHTML;
+    });
+  });
 }
 
 function makeObject(data) {
@@ -122,3 +155,6 @@ button.addEventListener("submit", (e) => {
   let input = document.getElementById("city-input").value;
   callWeatherData(input);
 });
+
+getData();
+renderSearchHistory();
