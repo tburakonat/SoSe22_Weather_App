@@ -96,7 +96,9 @@ class City {
   }
 
   getCurrentTime() {
-    const localTime = fromUnixTime(this.datetime + this.offset).toUTCString();
+    const localTime = new Date(
+      (this.datetime + this.offset) * 1000
+    ).toUTCString();
     let hours = localTime.slice(17, 19);
     let minutes = localTime.slice(20, 22);
     let suffix = "am";

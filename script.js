@@ -12,7 +12,7 @@ async function callWeatherData(city) {
     setData();
     renderSearchHistory();
   } catch (error) {
-    console.log("Something went wrong: " + error);
+    console.log(error);
   }
 }
 
@@ -29,7 +29,21 @@ async function callForecastData(lat, lon, city) {
     const data = await response.json();
     addForecast(data, city);
   } catch (error) {
-    console.log("Something went wrong: 2" + error);
+    console.log(error);
+  }
+}
+
+async function getCity(location) {
+  const { lat, lon } = location;
+  try {
+    const response = await fetch(
+      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&APPID=2721941ff1d23996817409883d4be5dd`,
+      { mode: "cors" }
+    );
+    const data = await response.json();
+    callWeatherData(data[0].name);
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -110,8 +124,6 @@ function addForecast(data, city) {
   city.setDt(cityDt);
   renderCurrentDay(city);
   renderForecast(city);
-  renderForecastToggler();
-  renderHistoryToggler();
 }
 
 function renderCurrentDay(city) {
@@ -128,8 +140,7 @@ function renderCurrentDay(city) {
   nameDiv.textContent = city.getCity() + ", " + city.getCountry();
   icon.src = city.getIcon();
   const dayName = document.getElementById("dayName");
-  dayName.textContent = city.getCurrentDay();
-  /* + ", " + city.getCurrentTime(); TODO: How to get accurate time without date-fns (possible from API)*/
+  dayName.textContent = city.getCurrentDay() + ", " + city.getCurrentTime();
 }
 
 function renderForecast(city) {
@@ -151,96 +162,75 @@ function renderForecast(city) {
   }
 }
 
-const button = document.getElementById("inputs");
-button.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let input = document.getElementById("city-input").value;
-  callWeatherData(input);
-});
+function setUpEventListeners() {
+  const button = document.getElementById("inputs");
+  const forecastToggler = document.getElementById("toggle-forecast");
+  const historyToggler = document.getElementById("toggle-history");
 
-function renderForecastToggler() {
-  if (!document.getElementById("toggle-forecast")) {
-    const forecastToggler = document.createElement("button");
-    forecastToggler.setAttribute("id", "toggle-forecast");
-    forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
-    document.querySelector(".middle-content").after(forecastToggler);
-    forecastToggler.addEventListener("click", () => {
-      const forecast = document.getElementById("forecast");
-      if (!forecast.classList.contains("fadeIn")) {
-        forecast.classList.remove("fadeOut");
-        forecast.classList.add("fadeIn");
-        forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-down"></i>`;
-      } else {
-        forecast.classList.add("fadeOut");
-        forecast.classList.remove("fadeIn");
-        forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
-      }
-    });
-  }
+  button.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let input = document.getElementById("city-input").value;
+    callWeatherData(input);
+  });
+
+  forecastToggler.addEventListener("click", () => {
+    const forecast = document.getElementById("forecast");
+    if (!forecast.classList.contains("fadeIn")) {
+      forecast.classList.remove("fadeOut");
+      forecast.classList.add("fadeIn");
+      forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-down"></i>`;
+    } else {
+      forecast.classList.add("fadeOut");
+      forecast.classList.remove("fadeIn");
+      forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
+    }
+  });
+
+  historyToggler.addEventListener("click", () => {
+    const searchHistory = document.getElementById("search-history");
+    const searchItems = document.getElementById("search-items");
+    if (!searchHistory.classList.contains("fadeFromRight")) {
+      searchHistory.classList.remove("fadeToRight");
+      searchItems.classList.remove("fadeToRight");
+      searchHistory.classList.add("fadeFromRight");
+      searchItems.classList.add("fadeFromRight");
+      historyToggler.innerHTML = `<i class="fa-solid fa-arrow-right"></i>`;
+    } else {
+      searchHistory.classList.add("fadeToRight");
+      searchItems.classList.add("fadeToRight");
+      searchHistory.classList.remove("fadeFromRight");
+      searchItems.classList.remove("fadeFromRight");
+      historyToggler.innerHTML = `<i class="fa-solid fa-arrow-left"></i>`;
+    }
+  });
 }
 
-const historyToggler = document.getElementById("toggle-history");
-
-historyToggler.addEventListener("click", () => {
-  const searchHistory = document.getElementById("search-history");
-  const searchItems = document.getElementById("search-items");
-  if (!searchHistory.classList.contains("fadeFromRight")) {
-    searchHistory.classList.remove("fadeToRight");
-    searchItems.classList.remove("fadeToRight");
-    searchHistory.classList.add("fadeFromRight");
-    searchItems.classList.add("fadeFromRight");
-    historyToggler.innerHTML = `<i class="fa-solid fa-arrow-right"></i>`;
-  } else {
-    searchHistory.classList.add("fadeToRight");
-    searchItems.classList.add("fadeToRight");
-    searchHistory.classList.remove("fadeFromRight");
-    searchItems.classList.remove("fadeFromRight");
-    historyToggler.innerHTML = `<i class="fa-solid fa-arrow-left"></i>`;
-  }
-});
-
-const city = document.getElementById("location");
-const country = document.getElementById("country");
-const state = document.getElementById("state");
-
-async function getCity(location) {
-  const { lat, lon } = location;
-  fetch(
-    `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&APPID=2721941ff1d23996817409883d4be5dd`
-  )
-    .then(async (res) => {
-      const data = await res.json();
-      callWeatherData(data[0].name);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-}
-
-function success(pos) {
+function success(position) {
   const location = {
-    lat: pos.coords.latitude,
-    lon: pos.coords.longitude,
+    lat: position.coords.latitude,
+    lon: position.coords.longitude,
   };
   getCity(location);
 }
 
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
+function error(error) {
+  console.error(error);
 }
 
-const options = {
-  enableHighAccuracy: false,
-  timeout: 5000,
-  maximumAge: 0,
-};
-
 function getLocation() {
-  navigator.geolocation.getCurrentPosition(success, error, options);
+  const options = {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }
 }
 
 window.addEventListener("load", () => {
   getLocation();
   getData();
   renderSearchHistory();
+  setUpEventListeners();
 });

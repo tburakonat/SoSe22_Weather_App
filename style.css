@@ -50,7 +50,7 @@ body {
 .left-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   width: 50%;
 }
 
@@ -131,9 +131,10 @@ body {
 #inputs {
   height: 10vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 }
 
 #city-input {
@@ -250,14 +251,8 @@ body {
     transform: translate3d(0, 100%, 0);
   }
 }
-/* 
-#forecast.visible {
-  opacity: 1;
-  height: 20vh;
-} */
 
 #toggle-forecast {
-  height: 5vh;
   background-color: rgba(127, 238, 136, 0.521);
   background-color: rgba(33, 33, 136, 0.849);
   font-size: large;
@@ -268,6 +263,9 @@ body {
   outline: none;
   color: rgba(255, 255, 255, 0.836);
   cursor: pointer;
+  margin-bottom: 20px;
+  height: 5vh;
+  margin-left: 8%;
 }
 
 #toggle-forecast:hover {
