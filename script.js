@@ -110,7 +110,8 @@ function addForecast(data, city) {
   city.setDt(cityDt);
   renderCurrentDay(city);
   renderForecast(city);
-  renderToggler();
+  renderForecastToggler();
+  renderHistoryToggler();
 }
 
 function renderCurrentDay(city) {
@@ -157,19 +158,22 @@ button.addEventListener("submit", (e) => {
   callWeatherData(input);
 });
 
-function renderToggler() {
+function renderForecastToggler() {
   if (!document.getElementById("toggle-forecast")) {
     const forecastToggler = document.createElement("button");
     forecastToggler.setAttribute("id", "toggle-forecast");
-    forecastToggler.innerHTML = "Toggle Forecast";
+    forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
     document.querySelector(".middle-content").after(forecastToggler);
     forecastToggler.addEventListener("click", () => {
       const forecast = document.getElementById("forecast");
-      if (!forecast.classList.contains("animate__fadeOutDown")) {
-        forecast.classList.add("animate__fadeOutDown");
+      if (!forecast.classList.contains("fadeIn")) {
+        forecast.classList.remove("fadeOut");
+        forecast.classList.add("fadeIn");
+        forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-down"></i>`;
       } else {
-        forecast.classList.remove("animate__fadeOutDown");
-        forecast.classList.add("animate__fadeInUp");
+        forecast.classList.add("fadeOut");
+        forecast.classList.remove("fadeIn");
+        forecastToggler.innerHTML = `<i class="fa-solid fa-arrow-up"></i>`;
       }
     });
   }
@@ -180,15 +184,19 @@ const historyToggler = document.getElementById("toggle-history");
 historyToggler.addEventListener("click", () => {
   const searchHistory = document.getElementById("search-history");
   const searchItems = document.getElementById("search-items");
-    if (!searchHistory.classList.contains("animate__fadeOutRight")) {
-      searchHistory.classList.add("animate__fadeOutRight");
-      searchItems.classList.add("animate__fadeOutRight");
-    } else {
-      searchHistory.classList.remove("animate__fadeOutRight");
-      searchItems.classList.remove("animate__fadeOutRight");
-      searchHistory.classList.add("animate__fadeInRight");
-      searchItems.classList.add("animate__fadeInRight");
-    }
+  if (!searchHistory.classList.contains("fadeFromRight")) {
+    searchHistory.classList.remove("fadeToRight");
+    searchItems.classList.remove("fadeToRight");
+    searchHistory.classList.add("fadeFromRight");
+    searchItems.classList.add("fadeFromRight");
+    historyToggler.innerHTML = `<i class="fa-solid fa-arrow-right"></i>`;
+  } else {
+    searchHistory.classList.add("fadeToRight");
+    searchItems.classList.add("fadeToRight");
+    searchHistory.classList.remove("fadeFromRight");
+    searchItems.classList.remove("fadeFromRight");
+    historyToggler.innerHTML = `<i class="fa-solid fa-arrow-left"></i>`;
+  }
 });
 
 const city = document.getElementById("location");

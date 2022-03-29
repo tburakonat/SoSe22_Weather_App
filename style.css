@@ -8,6 +8,7 @@ body {
 #topbar {
   height: 15vh;
   background-color: rgba(19, 117, 27, 0.521);
+  background-color: rgba(33, 33, 136, 0.849);
   color: white;
   display: flex;
   align-items: center;
@@ -27,10 +28,11 @@ body {
   height: 85vh;
   margin: 0;
   padding: 0;
-  background: url(images/night3.png) no-repeat center center fixed;
+  /*background: url(images/night3.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover;*/
+  background-color: rgba(33, 33, 136, 0.589);
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -65,8 +67,7 @@ body {
   width: 40%;
   background-color: rgba(31, 26, 26, 0.37);
   text-align: center;
-  opacity: 1;
-  transition: all 1000ms ease-in;
+  opacity: 0;
 }
 
 .search-items {
@@ -76,8 +77,39 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  opacity: 1;
-  transition: all 1000ms ease-in;
+  opacity: 0;
+}
+
+.fadeFromRight {
+  animation-name: fadeLeft;
+  animation-duration: 1s;
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeToRight {
+  animation: fadeRight;
+  animation-duration: 1s;
+}
+
+@keyframes fadeRight {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 .search-button {
@@ -116,18 +148,20 @@ body {
 
 #submit-city {
   background-color: rgba(127, 238, 136, 0.521);
+  background-color: rgba(33, 33, 136, 0.849);
   font-size: x-large;
   border-radius: 0 25px 25px 0;
   height: 50px;
   width: 150px;
   border: none;
   outline: none;
-  color: rgb(34, 32, 32);
+  color: rgba(255, 255, 255, 0.836);
   cursor: pointer;
 }
 
 #submit-city:hover {
   background-color: rgba(127, 238, 136, 0.404);
+  background-color: rgba(33, 33, 136, 0.644);
 }
 
 /* -------------- MID SECTION -------------- */
@@ -182,8 +216,39 @@ body {
   justify-content: space-around;
   height: 20vh;
   color: rgb(255, 255, 255);
-  /* opacity: 0; */
-  /* transition: all 1000ms ease-in; */
+  opacity: 0;
+}
+
+.fadeIn {
+  animation-name: fadeUp;
+  animation-duration: 1s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeOut {
+  animation: fadeDown;
+  animation-duration: 1s;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
 }
 /* 
 #forecast.visible {
@@ -194,18 +259,20 @@ body {
 #toggle-forecast {
   height: 5vh;
   background-color: rgba(127, 238, 136, 0.521);
+  background-color: rgba(33, 33, 136, 0.849);
   font-size: large;
   border-radius: 25px;
   height: 50px;
   width: 150px;
   border: none;
   outline: none;
-  color: rgb(34, 32, 32);
+  color: rgba(255, 255, 255, 0.836);
   cursor: pointer;
 }
 
 #toggle-forecast:hover {
   background-color: rgba(127, 238, 136, 0.404);
+  background-color: rgba(33, 33, 136, 0.644);
 }
 
 .forecast-day {
@@ -219,17 +286,19 @@ body {
 #toggle-history {
   height: 5vh;
   background-color: rgba(127, 238, 136, 0.521);
+  background-color: rgba(33, 33, 136, 0.849);
   font-size: large;
   border-radius: 25px;
   height: 50px;
   width: 150px;
   border: none;
   outline: none;
-  color: rgb(34, 32, 32);
+  color: rgba(255, 255, 255, 0.836);
   cursor: pointer;
   margin: 1.5em 1.5em 1.5em auto;
 }
 
 #toggle-history:hover {
   background-color: rgba(127, 238, 136, 0.404);
+  background-color: rgba(33, 33, 136, 0.644);
 }
