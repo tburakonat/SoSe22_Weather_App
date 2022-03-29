@@ -6,6 +6,26 @@ class Day {
     this.cloudPercentage = cloudPercentage;
     this.icon = icon;
     this.datetime = dt;
+    this.hashmap = new Map([
+      ["01d", "svgs/day.svg"],
+      ["01n", "svgs/night.svg"],
+      ["02d", "svgs/cloudy-day-3.svg"],
+      ["02n", "svgs/cloudy-night-3.svg"],
+      ["03d", "svgs/cloudy.svg"],
+      ["03n", "svgs/cloudy.svg"],
+      ["04d", "svgs/cloudy.svg"],
+      ["04n", "svgs/cloudy.svg"],
+      ["09d", "svgs/rainy-6.svg"],
+      ["09n", "svgs/rainy-6.svg"],
+      ["10d", "svgs/rainy-3.svg"],
+      ["10n", "svgs/rainy-3.svg"],
+      ["11d", "svgs/thunder.svg"],
+      ["11n", "svgs/thunder.svg"],
+      ["13d", "svgs/snowy-6.svg"],
+      ["13n", "svgs/snowy-6.svg"],
+      ["50d", "svgs/cloudy.svg"],
+      ["50n", "svgs/cloudy.svg"],
+    ]);
   }
 
   getTemperature() {
@@ -47,6 +67,6 @@ class Day {
   }
 
   getIcon() {
-    return "https://openweathermap.org/img/wn/" + this.icon + "@2x.png";
+    return this.hashmap.get(this.icon);
   }
 }
