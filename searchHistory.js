@@ -10,7 +10,7 @@ const searchHistory = (() => {
       let index = items.indexOf(city);
       items.splice(index, 1);
     }
-    if (items.length > 4) {
+    if (items.length > 8) {
       items.pop();
     }
     items.unshift(city);
