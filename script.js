@@ -165,14 +165,31 @@ function renderToggler() {
     document.querySelector(".middle-content").after(forecastToggler);
     forecastToggler.addEventListener("click", () => {
       const forecast = document.getElementById("forecast");
-      if (!forecast.classList.contains("visible")) {
-        forecast.classList.add("visible");
+      if (!forecast.classList.contains("animate__fadeOutDown")) {
+        forecast.classList.add("animate__fadeOutDown");
       } else {
-        forecast.classList.remove("visible");
+        forecast.classList.remove("animate__fadeOutDown");
+        forecast.classList.add("animate__fadeInUp");
       }
     });
   }
 }
+
+const historyToggler = document.getElementById("toggle-history");
+
+historyToggler.addEventListener("click", () => {
+  const searchHistory = document.getElementById("search-history");
+  const searchItems = document.getElementById("search-items");
+    if (!searchHistory.classList.contains("animate__fadeOutRight")) {
+      searchHistory.classList.add("animate__fadeOutRight");
+      searchItems.classList.add("animate__fadeOutRight");
+    } else {
+      searchHistory.classList.remove("animate__fadeOutRight");
+      searchItems.classList.remove("animate__fadeOutRight");
+      searchHistory.classList.add("animate__fadeInRight");
+      searchItems.classList.add("animate__fadeInRight");
+    }
+});
 
 const city = document.getElementById("location");
 const country = document.getElementById("country");

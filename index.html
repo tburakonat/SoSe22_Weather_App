@@ -8,6 +8,10 @@
       src="https://kit.fontawesome.com/4921d1b422.js"
       crossorigin="anonymous"
     ></script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
@@ -44,13 +48,14 @@
           </div>
         </div>
         <div class="right-content">
-          <div class="search-history">
+          <button id="toggle-history">Toggle History</button>
+          <div id="search-history" class="search-history animate__animated">
             <i class="fa-solid fa-pen-to-square"></i> Last searches
           </div>
-          <div class="search-items"></div>
+          <div id="search-items" class="search-items animate__animated"></div>
         </div>
       </div>
-      <div id="forecast"></div>
+      <div id="forecast" class="animate__animated"></div>
     </div>
     <script src="searchHistory.js"></script>
     <script src="city.js"></script>
